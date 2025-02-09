@@ -56,11 +56,11 @@ class LineChart extends StatelessWidget {
                       : chart.LineChart(
                           chart.LineChartData(
                             borderData: chart.FlBorderData(show: false),
-                            gridData: chart.FlGridData(show: false),
+                            gridData: const chart.FlGridData(show: false),
                             lineTouchData: chart.LineTouchData(
                               enabled: showToolTip ?? true,
                               touchTooltipData: chart.LineTouchTooltipData(
-                                tooltipBgColor:
+                                getTooltipColor: (touchedSpot) =>
                                     toolTipBgColor ?? Colors.green.shade50,
                                 tooltipRoundedRadius: 8,
                                 fitInsideHorizontally: true,
@@ -92,9 +92,12 @@ class LineChart extends StatelessWidget {
                                   gradient: chartColor ??
                                       LinearGradient(
                                         colors: [
-                                          Colors.green.withOpacity(0.8),
-                                          Colors.green.withOpacity(0.4),
-                                          Colors.green.withOpacity(0.0),
+                                          Colors.green
+                                              .withValues(alpha: 0.8 * 255),
+                                          Colors.green
+                                              .withValues(alpha: 0.4 * 255),
+                                          Colors.green
+                                              .withValues(alpha: 0.0 * 255),
                                         ],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
@@ -105,16 +108,15 @@ class LineChart extends StatelessWidget {
                                   color: Colors.transparent,
                                   applyCutOffY: false,
                                 ),
-                                dotData: chart.FlDotData(
+                                dotData: const chart.FlDotData(
                                   show: false,
                                 ),
                               ),
                             ],
-                            titlesData: chart.FlTitlesData(show: false),
+                            titlesData: const chart.FlTitlesData(show: false),
                           ),
-                          swapAnimationDuration:
-                              const Duration(milliseconds: 150),
-                          swapAnimationCurve: Curves.linear,
+                          duration: const Duration(milliseconds: 150),
+                          curve: Curves.linear,
                         ),
                 ),
               ),
